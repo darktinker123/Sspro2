@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dbiLocator" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=dbiLocator;Integrated Security=True" SettingsObjectName="iLocatorAstar.Properties.Settings" SettingsPropertyName="dbiLocatorConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tblUserLogs" Member="tblUserLogs">
+    <Type Name="tblUserLog">
+      <Column Name="userLogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="usertype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="currentLocation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="destination" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="userLogTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.v_userlogs" Member="v_userlogs">
+    <Type Name="v_userlog">
+      <Column Name="userLogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="usertype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="currentLocation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="destination" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="userLogTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_Person" Member="tbl_Persons">
+    <Type Name="tbl_Person">
+      <Column Name="PersonID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="UserType" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sp_AddUserLogs" Method="sp_AddUserLogs">
+    <Parameter Name="utype" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="start" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="dest" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="logTime" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_ViewSummaryAll" Method="sp_ViewSummaryAll">
+    <Parameter Name="year" Type="System.Int32" DbType="Int" />
+    <Parameter Name="month" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_ViewSummaryAllResult">
+      <Column Name="userLogID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="usertype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="currentLocation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="destination" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="userLogTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_ViewSummaryByUserType" Method="sp_ViewSummaryByUserType">
+    <Parameter Name="year" Type="System.Int32" DbType="Int" />
+    <Parameter Name="month" Type="System.Int32" DbType="Int" />
+    <Parameter Name="usertype" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="sp_ViewSummaryByUserTypeResult">
+      <Column Name="userLogID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="usertype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="currentLocation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="destination" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="userLogTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_AddPerson" Method="sp_AddPerson">
+    <Parameter Name="LastName" Parameter="lastName" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="FirstName" Parameter="firstName" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="UserType" Parameter="userType" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="Purpose" Parameter="purpose" Type="System.String" DbType="VarChar(255)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_ViewSearch" Method="sp_ViewSearch">
+    <ElementType Name="sp_ViewSearchResult">
+      <Column Name="PersonID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="UserType" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Purpose" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_UpdatePerson" Method="sp_UpdatePerson">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FirstName" Parameter="firstName" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="LastName" Parameter="lastName" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="Purpose" Parameter="purpose" Type="System.String" DbType="VarChar(255)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Search" Method="sp_Search">
+    <Parameter Name="Key" Parameter="key" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_SearchResult">
+      <Column Name="PersonID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="UserType" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Purpose" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>
